@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 #创建目录
 mkdir -p /usr/local/h-ui/
 #下载最新版h-ui应用程序，将下载的文件保存到/usr/local/h-ui/h-ui，在下载完成后，给下载的文件添加执行权限
