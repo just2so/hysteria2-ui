@@ -1,7 +1,3 @@
-<h1 align="center">
-  H-UI Service One-Click Installation Script
-</h1>
-
 * 一键安装H-UI服务
 
 ```shell
