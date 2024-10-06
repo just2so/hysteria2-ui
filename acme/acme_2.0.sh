@@ -2,6 +2,7 @@
 
 # 确保脚本在遇到错误时退出
 set -e
+clear
 
 # 检查系统类型
 if [ -f /etc/os-release ]; then
