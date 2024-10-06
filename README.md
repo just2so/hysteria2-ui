@@ -1,5 +1,5 @@
 <h1 align="center">
-  H-UI quick installation script
+  H-UI Service One-Click Installation Script
 </h1>
 
 <p align="center">
