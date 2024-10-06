@@ -1,4 +1,4 @@
-* 申请证书
+* 申请SSL证书
 
 ```shell
 bash <(curl -Ls https://raw.githubusercontent.com/just2so/hysteria2-ui/main/acme_2.0.sh)
