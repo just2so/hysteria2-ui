@@ -14,8 +14,8 @@ else
     exit 1
 fi
 
-# 提示用户输入域名和电子邮件地址
-read -p "请输入域名: " DOMAIN
+# 提示用户输入二级域名和电子邮件地址
+read -p "请输入二级域名: " DOMAIN
 read -p "请输入电子邮件地址: " EMAIL
 
 # 显示选项菜单
