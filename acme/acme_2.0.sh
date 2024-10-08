@@ -1,4 +1,5 @@
 #!/bin/bash
+# Author: Content sourced from the internet
 
 # 确保脚本在遇到错误时退出
 set -e
