@@ -3,30 +3,33 @@ name: Scheduled Database Update
 on:
   schedule:
     - cron: '0 0 * * *'  # 每天晚上 12 点 UTC，相当于北京时间每天早上 8 点执行
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   update-database:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Run SQL command on server
-      uses: appleboy/ssh-action@master
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Copy script to server
+      uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.SERVER_HOST }}             # 服务器 IP 或主机名
         username: ${{ secrets.SERVER_USER }}         # 服务器用户名
         password: ${{ secrets.SERVER_PASSWORD }}     # 服务器密码
         port: ${{ secrets.SERVER_PORT }}             # 端口号
+        source: './update_database.sh'               # 脚本路径
+        target: '~/update_database.sh'               # 目标路径
+
+    - name: Run script on server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        password: ${{ secrets.SERVER_PASSWORD }}
+        port: ${{ secrets.SERVER_PORT }}
         script: |
-          NEW_UUID=$(uuidgen)
-          sqlite3 /usr/local/h-ui/data/h_ui.db <<EOF
-          UPDATE account
-          SET con_pass = 'zhangsan.$NEW_UUID'
-          WHERE username = 'zhangsan';
-          EOF
-          if [ $? -eq 0 ]; then
-            echo "Database updated successfully."
-          else
-            echo "Failed to update database."
-            exit 1
-          fi
+          chmod +x ~/update_database.sh
+          ~/update_database.sh
