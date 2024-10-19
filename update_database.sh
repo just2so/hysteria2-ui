@@ -5,11 +5,14 @@ NEW_UUID=$(uuidgen)
 
 echo "Generated UUID: $NEW_UUID"
 
+# 获取用户名（通过环境变量）
+USERNAME=${USERNAME}
+
 # 执行 SQLite 更新命令并捕获影响的行数
 ROWS_AFFECTED=$(sqlite3 /usr/local/h-ui/data/h_ui.db <<EOF
 UPDATE account
-SET con_pass = 'zhangsan.$NEW_UUID'
-WHERE username = 'zhangsan';
+SET con_pass = '$USERNAME.$NEW_UUID'
+WHERE username = '$USERNAME';
 SELECT changes();
 EOF
 )
