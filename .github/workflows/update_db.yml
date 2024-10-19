@@ -21,7 +21,7 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}     # 服务器密码
         port: ${{ secrets.SERVER_PORT }}             # 端口号
         source: './update_database.sh'               # 脚本路径
-        target: 'root/update_database'               # 目标路径
+        target: '/update_database'               # 目标路径
 
     - name: Run script on server
       uses: appleboy/ssh-action@master
