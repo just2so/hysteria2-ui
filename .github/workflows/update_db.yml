@@ -33,5 +33,6 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}
         port: ${{ secrets.SERVER_PORT }}
         script: |
+          export USERNAME='${{ secrets.USERNAME }}'  # 将环境变量导出
           chmod +x /github_actions/update_database.sh
           bash /github_actions/update_database.sh
