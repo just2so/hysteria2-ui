@@ -41,5 +41,6 @@ jobs:
           export OPEN_ID='${{ secrets.OPEN_ID }}'  # 将环境变量导出
           export APP_ID='${{ secrets.APP_ID }}'  # 将环境变量导出
           export APP_SECRET='${{ secrets.APP_SECRET }}'  # 将环境变量导出
+          export TEMPLATE_ID='${{ secrets.TEMPLATE_ID }}'  # 将环境变量导出
           chmod +x /github_actions/update_database.sh
           bash /github_actions/update_database.sh
