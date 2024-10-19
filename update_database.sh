@@ -1,6 +1,7 @@
 #!/bin/bash
 
 OPEN_ID="$OPEN_ID"              # 替换为你的 OPEN_ID
+TEMPLATE_ID="$TEMPLATE_ID"  # 微信模板 ID
 
 # 生成新的 UUID
 NEW_UUID=$(uuidgen)
@@ -45,16 +46,21 @@ get_access_token() {
 
 send_uuid_and_username() {
     local access_token="$1"
-    local message="UUID: $NEW_UUID\n用户名: $USERNAME"
+    local uuid="$NEW_UUID"
+    local username="$USERNAME"
 
     local body=$(jq -n \
         --arg touser "$OPEN_ID" \
-        --arg content "$message" \
+        --arg template_id "$TEMPLATE_ID" \
+        --arg uuid "$uuid" \
+        --arg username "$username" \
         '{
             touser: $touser,
-            msgtype: "text",
-            text: {
-                content: $content
+            template_id: $template_id,
+            url: "https://weixin.qq.com",
+            data: {
+                uuid: { value: $uuid },
+                username: { value: $username }
             }
         }')
 
