@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# 微信公众号配置
-APP_ID=${APP_ID}                # 替换为你的 APP_ID
-APP_SECRET=${APP_SECRET}        # 替换为你的 APP_SECRET
-OPEN_ID=${OPEN_ID}              # 替换为你的 OPEN_ID
+OPEN_ID="$OPEN_ID"              # 替换为你的 OPEN_ID
 
 # 生成新的 UUID
 NEW_UUID=$(uuidgen)
