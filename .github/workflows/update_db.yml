@@ -26,21 +26,27 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         OPEN_ID: ${{ secrets.OPEN_ID }}
         APP_ID: ${{ secrets.APP_ID }}
-        APP_SECRET: ${{ secrets.APPSECRET }}
+        APP_SECRET: ${{ secrets.APP_SECRET }}
         TEMPLATE_ID: ${{ secrets.TEMPLATE_ID }}
 
-    - name: Run script on server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        password: ${{ secrets.SERVER_PASSWORD }}
-        port: ${{ secrets.SERVER_PORT }}
-        script: |
-          export USERNAME='${{ secrets.USERNAME }}'  # 将环境变量导出
-          export OPEN_ID='${{ secrets.OPEN_ID }}'  # 将环境变量导出
-          export APP_ID='${{ secrets.APP_ID }}'  # 将环境变量导出
-          export APP_SECRET='${{ secrets.APP_SECRET }}'  # 将环境变量导出
-          export TEMPLATE_ID='${{ secrets.TEMPLATE_ID }}'  # 将环境变量导出
-          chmod +x /github_actions/update_database.sh
-          bash /github_actions/update_database.sh
+    - name: Run script on server with retry
+      id: run-script
+      run: |
+        max_attempts=5
+        attempt=1
+        while [ $attempt -le $max_attempts ]; do
+          echo "Attempt $attempt of $max_attempts..."
+          if ssh -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'bash /github_actions/update_database.sh'; then
+            echo "Script executed successfully."
+            break
+          else
+            echo "Script failed. Retrying in 2 minutes..."
+            sleep 120  # 等待2分钟
+          fi
+          attempt=$((attempt + 1))
+        done
+
+    - name: Notify on failure
+      if: steps.run-script.outcome == 'failure'
+      run: |
+        echo "The script failed after $max_attempts attempts."
