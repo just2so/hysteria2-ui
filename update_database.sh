@@ -64,14 +64,14 @@ send_uuid_and_username() {
             }
         }')
 
-    local url="https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=${access_token}"
+    local url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${access_token}"
     local response=$(curl -s -X POST -H "Content-Type: application/json" -d "$body" "$url")
 
     local err_code=$(echo "$response" | jq -r '.errcode')
     if [[ "$err_code" != "0" ]]; then
         echo "发送消息失败：$response"
     else
-        echo "UUID 和用户名发送成功！"
+        echo "UUID和用户名发送成功！"
     fi
 }
 
