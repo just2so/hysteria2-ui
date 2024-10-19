@@ -31,5 +31,5 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}
         port: ${{ secrets.SERVER_PORT }}
         script: |
-          chmod +x root/update_database/update_database.sh
-          bash root/update_database/update_database.sh
+          chmod +x /update_database/update_database.sh
+          bash /update_database/update_database.sh
