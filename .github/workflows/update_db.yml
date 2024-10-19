@@ -21,7 +21,7 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}     # 服务器密码
         port: ${{ secrets.SERVER_PORT }}             # 端口号
         source: './update_database.sh'               # 脚本路径
-        target: '/update_database'               # 目标路径
+        target: '/github_actions'                    # 目标路径
 
     - name: Run script on server
       uses: appleboy/ssh-action@master
@@ -30,6 +30,8 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         password: ${{ secrets.SERVER_PASSWORD }}
         port: ${{ secrets.SERVER_PORT }}
+        envs:  
+          USERNAME: ${{ secrets.USERNAME }}
         script: |
-          chmod +x /update_database/update_database.sh
-          bash /update_database/update_database.sh
+          chmod +x /github_actions/update_database.sh
+          bash /github_actions/update_database.sh
