@@ -3,7 +3,6 @@
 OPEN_ID="$OPEN_ID"          # 替换为OPEN_ID
 TEMPLATE_ID="$TEMPLATE_ID"  # 微信模板 ID
 
-# 生成新的 UUID
 NEW_UUID=$(uuidgen)
 
 echo "Generated UUID: $NEW_UUID"
@@ -11,7 +10,6 @@ echo "Generated UUID: $NEW_UUID"
 # 获取用户名，通过环境变量
 USERNAME=${USERNAME}
 
-# 执行 SQLite 更新命令并捕获影响的行数
 ROWS_AFFECTED=$(sqlite3 /usr/local/h-ui/data/h_ui.db <<EOF
 UPDATE account
 SET con_pass = '$USERNAME.$NEW_UUID'
@@ -77,6 +75,5 @@ send_uuid_and_username() {
     fi
 }
 
-# 主流程
 access_token=$(get_access_token)
 send_uuid_and_username "$access_token"
