@@ -30,8 +30,8 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         password: ${{ secrets.SERVER_PASSWORD }}
         port: ${{ secrets.SERVER_PORT }}
-        envs:  
-          USERNAME: ${{ secrets.USERNAME }}
+      env:  
+        USERNAME: ${{ secrets.USERNAME }}
         script: |
           chmod +x /github_actions/update_database.sh
           bash /github_actions/update_database.sh
