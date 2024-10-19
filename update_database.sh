@@ -71,6 +71,7 @@ send_uuid_and_username() {
     local err_code=$(echo "$response" | jq -r '.errcode')
     if [[ "$err_code" != "0" ]]; then
         echo "发送消息失败：$response"
+        exit 1
     else
         echo "UUID和用户名发送成功！"
     fi
