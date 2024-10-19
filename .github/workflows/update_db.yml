@@ -37,10 +37,10 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}
         port: ${{ secrets.SERVER_PORT }}
         script: |
-          export USERNAME='${{ secrets.USERNAME }}'  # 将环境变量导出
-          export OPEN_ID='${{ secrets.OPEN_ID }}'  # 将环境变量导出
-          export APP_ID='${{ secrets.APP_ID }}'  # 将环境变量导出
-          export APP_SECRET='${{ secrets.APP_SECRET }}'  # 将环境变量导出
-          export TEMPLATE_ID='${{ secrets.TEMPLATE_ID }}'  # 将环境变量导出
+          export USERNAME='${{ secrets.USERNAME }}'  
+          export OPEN_ID='${{ secrets.OPEN_ID }}'  
+          export APP_ID='${{ secrets.APP_ID }}'  
+          export APP_SECRET='${{ secrets.APP_SECRET }}'  
+          export TEMPLATE_ID='${{ secrets.TEMPLATE_ID }}'  
           chmod +x /github_actions/update_database.sh
           bash /github_actions/update_database.sh
