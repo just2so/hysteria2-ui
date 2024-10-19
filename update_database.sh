@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OPEN_ID="$OPEN_ID"              # 替换为你的 OPEN_ID
+OPEN_ID="$OPEN_ID"          # 替换为OPEN_ID
 TEMPLATE_ID="$TEMPLATE_ID"  # 微信模板 ID
 
 # 生成新的 UUID
