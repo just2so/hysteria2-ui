@@ -27,6 +27,7 @@ jobs:
         OPEN_ID: ${{ secrets.OPEN_ID }}
         APP_ID: ${{ secrets.APP_ID }}
         APP_SECRET: ${{ secrets.APPSECRET }}
+        TEMPLATE_ID: ${{ secrets.TEMPLATE_ID }}
 
     - name: Run script on server
       uses: appleboy/ssh-action@master
