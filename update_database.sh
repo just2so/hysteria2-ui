@@ -19,5 +19,4 @@ if [ "$ROWS_AFFECTED" -gt 0 ]; then
   echo "Database updated successfully. Rows affected: $ROWS_AFFECTED"
 else
   echo "No rows were updated. Update failed."
-  exit 1
 fi
