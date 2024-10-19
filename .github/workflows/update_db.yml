@@ -24,6 +24,9 @@ jobs:
         target: '/github_actions'                    # 目标路径
       env:  
         USERNAME: ${{ secrets.USERNAME }}
+        OPEN_ID: ${{ secrets.OPEN_ID }}
+        APP_ID: ${{ secrets.APP_ID }}
+        APP_SECRET: ${{ secrets.APPSECRET }}
 
     - name: Run script on server
       uses: appleboy/ssh-action@master
@@ -34,5 +37,8 @@ jobs:
         port: ${{ secrets.SERVER_PORT }}
         script: |
           export USERNAME='${{ secrets.USERNAME }}'  # 将环境变量导出
+          export OPEN_ID='${{ secrets.OPEN_ID }}'  # 将环境变量导出
+          export APP_ID='${{ secrets.APP_ID }}'  # 将环境变量导出
+          export APP_SECRET='${{ secrets.APP_SECRET }}'  # 将环境变量导出
           chmod +x /github_actions/update_database.sh
           bash /github_actions/update_database.sh
